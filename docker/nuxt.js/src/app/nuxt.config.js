@@ -44,13 +44,32 @@ export default {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+  },
+  /*
+  ** Auth module cofiguration
+  **
+  */
+  auth: {
+    strategies: {
+      auth0: {
+        domain: 'dev-geujc9-m.auth0.com',
+        client_id: 'K8fe0XU8Dx2iScvSpkRNgM48rNTwzszX'
+      }
+    },
+    redirect: {
+      login: '/login',
+      logout: '/logout',
+      callback: '/callback',
+      home: '/mypage'
+    }
   },
   /*
   ** vuetify module configuration
