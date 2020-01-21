@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <v-container>
     <p>Please Wating・・・・</p>
-  </el-container>
+  </v-container>
 </template>
