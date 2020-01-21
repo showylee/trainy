@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+require('dotenv').config()
 
 export default {
   mode: 'spa',
@@ -39,18 +40,47 @@ export default {
     '@nuxtjs/eslint-module',
     '@nuxtjs/vuetify'
   ],
+  router: {
+    middleware: 'auth'
+  },
   /*
   ** Nuxt.js modules
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth',
+    '@nuxtjs/dotenv'
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+  },
+  /*
+  ** Auth module cofiguration
+  **
+  */
+  auth: {
+    strategies: {
+      auth0: {
+        domain: process.env.AUTHZERO_DOMAIN,
+        client_id: process.env.AUTHZERO_CLIENT_ID
+      }
+    },
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      callback: '/callback',
+      home: '/mypage'
+    }
+  },
+  /*
+  ** dotenv module cofiguration
+  **
+  */
+  env: {
   },
   /*
   ** vuetify module configuration
