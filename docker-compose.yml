@@ -13,3 +13,12 @@ services:
       - /src/app/node_modules
     tty: true
     stdin_open: true
+  postgres:
+    container_name: postgres
+    build:
+      context: ./docker/postgres
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_USER=gopher
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=go_db
