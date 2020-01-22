@@ -1,0 +1,3 @@
+DELETE FROM ITEM;
+INSERT INTO ITEM VALUES(1, 'ベンチプレス');
+INSERT INTO ITEM VALUES(2, 'インクラインダンベルフライ');
