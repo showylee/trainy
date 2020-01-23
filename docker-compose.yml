@@ -13,3 +13,25 @@ services:
       - /src/app/node_modules
     tty: true
     stdin_open: true
+  postgres:
+    container_name: postgres
+    build:
+      context: ./docker/postgres
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_USER=gopher
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=go_db
+  golang:
+    container_name: golang
+    depends_on:
+      - postgres
+    build:
+      context: ./docker/golang
+      dockerfile: Dockerfile
+    environment:
+      - GOPATH=/go
+      - GO111MODULES=on
+    volumes:
+      - ./docker/golang/api:/go/src/app/api/
+    command: go run main.go
