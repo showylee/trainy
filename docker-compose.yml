@@ -31,7 +31,10 @@ services:
       dockerfile: Dockerfile
     environment:
       - GOPATH=/go
-      - GO111MODULES=on
+      - GO111MODULE=on
+    ports:
+      - "1323:1323"
     volumes:
       - ./docker/golang/api:/go/src/app/api/
     command: go run main.go
+    tty: true
