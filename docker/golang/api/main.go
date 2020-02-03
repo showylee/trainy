@@ -4,11 +4,10 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/labstack/echo"
+	_ "github.com/lib/pq"
 	"log"
 	"net/http"
 	"strconv"
-
-	_ "github.com/lib/pq"
 )
 
 type Item struct {
@@ -24,11 +23,6 @@ func main() {
 
 func routing(e *echo.Echo) {
 	e.GET("/", healthcheck)
-	e.GET("/test", test)
-}
-
-func test(c echo.Context) error {
-	return c.JSON(http.StatusOK, map[string]string{"message": "test"})
 }
 
 func healthcheck(c echo.Context) error {
