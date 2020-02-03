@@ -3,3 +3,6 @@
 
 # direnv config file.
 .envrc
+
+# build file
+*.out

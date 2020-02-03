@@ -3,9 +3,11 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"log"
-
+	"github.com/labstack/echo"
 	_ "github.com/lib/pq"
+	"log"
+	"net/http"
+	"strconv"
 )
 
 type Item struct {
@@ -14,6 +16,16 @@ type Item struct {
 }
 
 func main() {
+	e := echo.New()
+	routing(e)
+	e.Logger.Fatal(e.Start(":1323"))
+}
+
+func routing(e *echo.Echo) {
+	e.GET("/", healthcheck)
+}
+
+func healthcheck(c echo.Context) error {
 	var Db *sql.DB
 	Db, err := sql.Open("postgres", "host=postgres user=gopher password=postgres dbname=go_db sslmode=disable")
 	if err != nil {
@@ -36,4 +48,5 @@ func main() {
 	}
 
 	fmt.Println(item.Id, item.Name)
+	return c.JSON(http.StatusOK, map[string]string{"id": strconv.Itoa(item.Id), "name": item.Name})
 }

@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 services:
   nuxt.js:
     container_name: nuxt.js
@@ -29,9 +29,8 @@ services:
     build:
       context: ./docker/golang
       dockerfile: Dockerfile
-    environment:
-      - GOPATH=/go
-      - GO111MODULES=on
+    ports:
+      - "1323:1323"
     volumes:
-      - ./docker/golang/api:/go/src/app/api/
-    command: go run main.go
+      - ./docker/golang/api:/go/src/api
+    command: realize start
