@@ -2,7 +2,7 @@ import colors from 'vuetify/es5/util/colors'
 require('dotenv').config()
 
 export default {
-  mode: 'spa',
+  mode: 'universal',
   /*
   ** Headers of the page
   */
@@ -31,6 +31,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/axios'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -50,13 +51,32 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/proxy'
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    proxy: true
+  },
+  /*
+  ** Proxy module configuration
+  */
+  proxy: {
+    '/api': {
+      target: 'http://golang:1323',
+      pathRewrite: {
+        '^/api' : '/'
+      }
+    },
+    '/api2': {
+      target: 'http://localhost:1323',
+      pathRewrite: {
+        '^/api' : '/'
+      }
+    }
   },
   /*
   ** Auth module cofiguration
